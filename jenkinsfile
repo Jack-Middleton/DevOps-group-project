@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    stages {
+   
+
+        stage('Build and Push') {
+            environment {
+                DOCKER_CREDS = credentials('DOCKER_CREDS')
+            }
+            steps {
+                dir('/home/jenkins/.jenkins/workspace/QAProject-team-3/spring-petclinic-angular') {
+                sh "docker build -t jackmqa/frontend ." 
+                }
+                dir('/home/jenkins/.jenkins/workspace/QAProject-team-3/spring-petclinic-rest') {
+                sh "docker build -t jackmqa/pet-backend ." 
+                }
+                sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
+                sh "docker push jackmqa/frontend jackmqa/pet-backend "
+                sh "/bin/bash -c 'docker rmi \$(docker images -q)'"
+            }
+        }
+
+        stage('Terraform') {
+            steps {
+                sh "cd terraform"
+                sh "terraform init"
+                sh "terraform apply"
+                sh "cd .."
+            }
+        }
+
+        stage('Kubernetes') {
+            steps {
+                sh "aws eks update-kubeconfig --name project-cluster"
+                sh "kubectl apply -f kubernetes/frontend.yaml"
+                sh "kubectl delete pod backend"
+                sh "kubectl apply -f kubernetes/backend.yaml"
+                sh "kubectl apply -f kubernetes/mysql-deployment.yaml"
+            }
+        }
+
+    }
+}
