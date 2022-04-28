@@ -1,7 +1,12 @@
 pipeline {
     agent any
     stages {
-   
+        stage('Testing'){
+             dir('/home/jenkins/.jenkins/workspace/project-pipeline/spring-petclinic-angular'){
+                 sh "npm i"
+                 sh "npm run test-headless"
+             }
+        }
 
         stage('Build and Push') {
             environment {
@@ -18,7 +23,7 @@ pipeline {
                 sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
                 sh "docker push jackmqa/pet-front-end"
                 sh "docker push jackmqa/pet-backend"
-            }
+                sh "/bin/bash -c 'docker rmi \$(docker images -q)'"
         }
 
         stage('Kubernetes') {
