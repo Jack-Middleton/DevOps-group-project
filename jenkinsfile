@@ -9,7 +9,7 @@ pipeline {
             }
             steps {
                 sh "pwd"
-                dir('/spring-petclinic-angular') {
+                dir('DevOps-group-project/spring-petclinic-angular') {
                 sh "docker build -t jackmqa/frontend ." 
                 }
                 dir('/home/ubuntu/DevOps-group-project/spring-petclinic-rest') {
