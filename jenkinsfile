@@ -1,22 +1,11 @@
 pipeline {
     agent any
     stages {
-        // stage('Test front end'){
-        //     steps {
-        //         dir('/home/jenkins/.jenkins/workspace/project-pipeline/spring-petclinic-angular') {
-        //         sh "npm i"
-        //         sh "npm run test-headless"
-        //      }
-        //     } 
-           
-        // }
-        stage ('Test back end'){
-            steps {
-                dir('/home/jenkins/.jenkins/workspace/project-pipeline/spring-petclinic-rest') {
-                sh "./mvnw clean test"
+        stage('Run front-backend tests'){
+            steps{
+                sh "bash jenkins/test.sh"
             }
         }
-    }
 
         stage('Build and Push') {
             environment {
