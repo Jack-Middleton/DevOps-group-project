@@ -2,10 +2,13 @@ pipeline {
     agent any
     stages {
         stage('Testing'){
-             dir('/home/jenkins/.jenkins/workspace/project-pipeline/spring-petclinic-angular'){
+            steps{
+                  dir('/home/jenkins/.jenkins/workspace/project-pipeline/spring-petclinic-angular'){
                  sh "npm i"
                  sh "npm run test-headless"
              }
+            }
+           
         }
 
         stage('Build and Push') {
