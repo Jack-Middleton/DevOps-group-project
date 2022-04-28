@@ -5,7 +5,7 @@ pipeline {
             steps {
                 dir('/home/jenkins/.jenkins/workspace/project-pipeline/spring-petclinic-angular') {
                 sh "npm i"
-                sh "npm run test-headless"
+                sh "npm run test -- -cc -sr --browser HeadlessChrome"
              }
             }
            
