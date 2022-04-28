@@ -16,6 +16,7 @@ pipeline {
                 sh "./mvnw clean test"
             }
         }
+    }
 
         stage('Build and Push') {
             environment {
