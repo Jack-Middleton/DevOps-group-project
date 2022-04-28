@@ -16,7 +16,7 @@ pipeline {
                 sh "docker build -t jackmqa/pet-backend ." 
                 }
                 sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
-                sh "docker push jackmqa/frontend"
+                sh "docker push jackmqa/pet-front-end"
                 sh "docker push jackmqa/pet-backend"
             }
         }
