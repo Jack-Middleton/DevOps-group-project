@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Testing'){
+        stage('Test front end'){
             steps {
                 dir('/home/jenkins/.jenkins/workspace/project-pipeline/spring-petclinic-angular') {
                 sh "npm i"
@@ -9,6 +9,12 @@ pipeline {
              }
             }
            
+        }
+        stage ('Test back end'){
+            steps {
+                dir('/home/jenkins/.jenkins/workspace/project-pipeline/spring-petclinic-rest') {
+                sh "./mvnw clean test"
+            }
         }
 
         stage('Build and Push') {
