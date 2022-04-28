@@ -11,11 +11,12 @@ pipeline {
                 dir('/home/ubuntu/DevOps-group-project/spring-petclinic-angular') {
                 sh "docker build -t jackmqa/frontend ." 
                 }
-                dir('/home/ubuntu/DevOps-group-project/spring-petclinic-angular') {
+                dir('/home/ubuntu/DevOps-group-project/spring-petclinic-rest') {
                 sh "docker build -t jackmqa/pet-backend ." 
                 }
                 sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
-                sh "docker push jackmqa/frontend jackmqa/pet-backend "
+                sh "docker push jackmqa/frontend"
+                sh "docker push jackmqa/pet-backend"
                 sh "/bin/bash -c 'docker rmi \$(docker images -q)'"
             }
         }
