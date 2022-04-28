@@ -2,10 +2,10 @@ pipeline {
     agent any
     stages {
         stage('Testing'){
-            steps{
-                  dir('/home/jenkins/.jenkins/workspace/project-pipeline/spring-petclinic-angular'){
-                 sh "npm i"
-                 sh "npm run test-headless"
+            steps {
+                dir('/home/jenkins/.jenkins/workspace/project-pipeline/spring-petclinic-angular') {
+                sh "npm i"
+                sh "npm run test-headless"
              }
             }
            
@@ -27,6 +27,7 @@ pipeline {
                 sh "docker push jackmqa/pet-front-end"
                 sh "docker push jackmqa/pet-backend"
                 sh "/bin/bash -c 'docker rmi \$(docker images -q)'"
+            }
         }
 
         stage('Kubernetes') {
@@ -39,6 +40,6 @@ pipeline {
             }
         }
 
-    }
+    
     }
 }
