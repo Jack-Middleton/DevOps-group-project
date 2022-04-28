@@ -20,18 +20,8 @@ pipeline {
             }
         }
 
-        stage('Terraform') {
-            steps {
-                sh "cd terraform"
-                sh "terraform init"
-                sh "terraform apply"
-                sh "cd .."
-            }
-        }
-
         stage('Kubernetes') {
             steps {
-                sh "aws eks update-kubeconfig --name project-cluster"
                 sh "kubectl apply -f kubernetes/frontend.yaml"
                 sh "kubectl delete pod backend"
                 sh "kubectl apply -f kubernetes/backend.yaml"
