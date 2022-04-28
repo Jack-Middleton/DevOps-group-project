@@ -8,7 +8,6 @@ pipeline {
                 DOCKER_CREDS = credentials('DOCKER_CREDS')
             }
             steps {
-                sh 
                 dir('/home/ubuntu/DevOps-group-project/spring-petclinic-angular') {
                 sh "docker build -t jackmqa/frontend ." 
                 }
