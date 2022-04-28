@@ -8,11 +8,11 @@ pipeline {
                 DOCKER_CREDS = credentials('DOCKER_CREDS')
             }
             steps {
-                sh "pwd"
-                dir('DevOps-group-project/spring-petclinic-angular') {
+                sh 
+                dir('/home/ubuntu/DevOps-group-project/spring-petclinic-angular') {
                 sh "docker build -t jackmqa/frontend ." 
                 }
-                dir('/home/ubuntu/DevOps-group-project/spring-petclinic-rest') {
+                dir('/home/ubuntu/DevOps-group-project/spring-petclinic-angular') {
                 sh "docker build -t jackmqa/pet-backend ." 
                 }
                 sh "docker login -u ${DOCKER_CREDS_USR} -p ${DOCKER_CREDS_PSW}"
