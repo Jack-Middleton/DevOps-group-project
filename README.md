@@ -160,13 +160,13 @@ The Jenkinsfile then ran a script containing Kubectl commands which applied the 
 
 This pipeline can be illustrated with the below diagram. 
 
-INSERT PIPELINE DIAGRAM
+![PIPELINE](https://github.com/Jack-Middleton/DevOps-group-project/blob/0531fbcd897745e88a1703b22ed4f5c50ef5f436/images/Diagram.png)
 
 # Demonstration of the application 
 
 The deployed application allows a user to input data about pet types and vets and whilst the application is running, the user can see and search the data that has been added. However as stated above, the MVP doesn't persist data so once the window is closed, the data is lost.
 
-!APPLICATION SCREENSHOT](https://github.com/Jack-Middleton/DevOps-group-project/blob/0c194c6b176ae1f458a2b71b9d07abd1b3ca6cf9/images/Application%20screenshot.png)
+![APPLICATION SCREENSHOT](https://github.com/Jack-Middleton/DevOps-group-project/blob/0c194c6b176ae1f458a2b71b9d07abd1b3ca6cf9/images/Application%20screenshot.png)
 
 # Budget
 
