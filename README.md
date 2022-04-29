@@ -10,7 +10,6 @@
 * Budget
 * Retrospective
 
-
 # Introduction
 The overall project scope was to take the following externally created application (broken into two repositories): 
 
@@ -26,7 +25,7 @@ and automate its development. This involved devising a plan for workflow, a desi
 
 Before commencing this project, we undertook a risk assessment to help us determine any possible risks or blockers to the project so that we could ensure that we put measures in place to reduce or eliminate these risks. The full risk assessment can be seen below.
 
-INSERT RISK ASSESSMENT SCREENSHOT
+![RISK ASSESSMENT](https://github.com/Jack-Middleton/DevOps-group-project/blob/0c194c6b176ae1f458a2b71b9d07abd1b3ca6cf9/images/Risk%20Assessment.png)
 
 During the project we had team absence and issues with the VMs so our control measures for these risks were helpful. 
 
@@ -61,7 +60,7 @@ If the team was deployed on a similar project in the future, story points would 
 
 Each day we had a daily stand-up to discuss the tasks for the day, what had been achieved the day before, any blockers and plans for the day. Additional tasks were then assigned and there were discussions around how to resolve any blockers. These stand-ups allowed the team visibility on each other’s work and ensured that everyone had a task to do. Peer programming was used so that no one in the team had to work alone, allowing knowledge sharing and joint problem solving.
 
-INSERT SCREENSHOT OF JIRA BOARD
+![JIRA BOARD](https://github.com/Jack-Middleton/DevOps-group-project/blob/0c194c6b176ae1f458a2b71b9d07abd1b3ca6cf9/images/Jira%20Board%20v2.png)
 
 ## Version Control System
 
@@ -116,7 +115,7 @@ The next step was to put in the right credentials which would be used at the Jen
 
 Successful builds were stored in an artefacts repository in Jenkins. 
 
-INSERT JENKINS BUILD SCREENSHOT
+![JENKINS BUILD](https://github.com/Jack-Middleton/DevOps-group-project/blob/0c194c6b176ae1f458a2b71b9d07abd1b3ca6cf9/images/Jenkins%20build.png)
 
 ## Automated testing with error reports generated
 
@@ -124,9 +123,9 @@ In the application, there were tests files built already, so we used Karma and M
 
 The process of unit testing for the frontend required a few modules to be installed beforehand to be able to run the tests. Nodejs had to be installed which was done using curl to download the executable file and installed with sudo permissions. After that dependencies were installed using npm i. NPM is the node package manager. As Karma outputs the test results on an external browser, Google Chrome was downloaded and installed using wget and sudo apt install. The test was then run using npm run test-headless. The headless command allows the test to run without opening the browser and allows the test to run in the background. This frontend test concluded with a 43/43 pass mark.
 
-For testing the backend a different approach was taken. Since Maven is used here java JDK is needed to run the test. This was a simple sudo apt install openjdk-11-jdk to install. This would then allow the mvnw script to be executed which would then run the test and test all 143 codes.
+![FRONTEND TEST](https://github.com/Jack-Middleton/DevOps-group-project/blob/0c194c6b176ae1f458a2b71b9d07abd1b3ca6cf9/images/Frontend%20Test%20image.png)
 
-INSERT TESTSCREEN SCREENSHOTS
+For testing the backend a different approach was taken. Since Maven is used here java JDK is needed to run the test. This was a simple sudo apt install openjdk-11-jdk to install. This would then allow the mvnw script to be executed which would then run the test and test all 143 codes.
 
 # Automated deployment
 
@@ -137,7 +136,7 @@ The application was deployed using Kubernetes on an Amazon EKS cluster. Using an
 * It monitors performance and automatically replaces unhealthy instances
 * It is easily scalable 
 
-Our EKS cluster was created using Terraform. 
+Our EKS cluster was created using Terraform as described above.
 
 Kubernetes (K8S) is a container orchestration tool which is used to automate deployments of containerised applications. We chose to use Kubernetes for the following reasons: 
 
@@ -154,8 +153,8 @@ We created manifests which were used to define the desired state of our cluster.
 The table below shows what was created via the manifests:
 
 Frontend	Pod, Load Balancer Service
-Backend 	Pod, Cluster IP Address
-Database	Pod, Persistent Volume?
+Backend 	Pod, Load Balancer Service
+Database	Pod, Persistent Volume
 
 The Jenkinsfile then ran a script containing Kubectl commands which applied the images created to the cluster. The application was then accessible via the load-balancer IP address. 
 
@@ -167,9 +166,17 @@ INSERT PIPELINE DIAGRAM
 
 The deployed application allows a user to input data about pet types and vets and whilst the application is running, the user can see and search the data that has been added. However as stated above, the MVP doesn't persist data so once the window is closed, the data is lost.
 
-INSERT application screenshot
+!APPLICATION SCREENSHOT](https://github.com/Jack-Middleton/DevOps-group-project/blob/0c194c6b176ae1f458a2b71b9d07abd1b3ca6cf9/images/Application%20screenshot.png)
 
-# Budget - running costs monthly
+# Budget
+
+Using Amazon’s own ‘Cost Explorer’ we found that our running costs based on this set up would be ~ £4.96 p/day, this comes to ~ £145.76 p/month to run the instances that had been set-up.
+
+This is relatively expensive so we examined how we could reduce the running costs as follows:
+
+* We can reduce the computing power of our VM’s by resizing to a smaller state, but increasing block size. (Which increases storage available).
+* For project purposes we can turn all virtual machines required off at night when they are not being worked on.
+* After a review, we noticed that we have the capacity for 34 pods across 2 nodes while we are only using 2 nodes and 6-7 pods. We could drastically reduce our costs by properly utilising the nodes we actually require to manage the application.
 
 # Retrospective
 
@@ -190,6 +197,6 @@ INSERT application screenshot
 
 ## What we would do differently? 
 * Start the project with trying to get the app running manually instead of going straight to automation planning
-* Be more cautious of what branch we’re working on to avoid merge conflicts later on
+* Be more cautious of what branch we’re working on to avoid merge conflicts later on - useGitHUb
 * Be more thorough in our planning of the entire pipeline and spent more time on defining the tasks
 * Select hardware that had more than ample specs to handle the workload 
