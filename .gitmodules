@@ -1,0 +1,6 @@
+[submodule "spring-petclinic-angular"]
+	path = spring-petclinic-angular
+	url = https://github.com/Jack-Middleton/spring-petclinic-angular.git
+[submodule "spring-petclinic-rest"]
+	path = spring-petclinic-rest
+	url = https://github.com/Jack-Middleton/spring-petclinic-rest.git
